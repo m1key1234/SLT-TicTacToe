@@ -1,0 +1,39 @@
+package at.technikum;
+
+import java.util.Scanner;
+
+    public class TicTacToe {
+        private Player player1;
+        private Board board;
+
+        public TicTacToe() {
+            player1 = new Player('X');
+            board = new Board();
+        }
+
+        public void start() {
+            Scanner scanner = new Scanner(System.in);
+
+            board.print();
+            int x, y;
+            while (true) {
+                System.out.println("Current Player: " + player1.getMarker());
+                System.out.print("row (0-2): ");
+                x = scanner.nextInt();
+                System.out.print("column (0-2): ");
+                y = scanner.nextInt();
+                if (x >= 0 && x < 3 && y >= 0 && y < 3 && board.isCellEmpty(x, y)) break;
+                System.out.println("Invalid move. Try again.");
+            }
+
+            board.place(x, y, player1.getMarker());
+            board.print();
+            scanner.close();
+        }
+
+        public static void main(String[] args) {
+            new TicTacToe().start();
+        }
+    }
+
+
