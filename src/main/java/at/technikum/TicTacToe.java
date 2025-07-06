@@ -29,13 +29,24 @@ public class TicTacToe {
                 if (x >= 0 && x < 3 && y >= 0 && y < 3 && board.isCellEmpty(x, y)) break;
                 System.out.println("Invalid move. Try again.");
             }
+
             board.place(x, y, currentPlayer.getMarker());
             System.out.println("Current game state after move:");
             board.print();
+
+            if (board.hasWinner(currentPlayer.getMarker())) {
+                System.out.println("Player " + currentPlayer.getMarker() + " wins!");
+                scanner.close();
+                return;
+            }
+
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
+
+        System.out.println("Game ended in a draw.");
         scanner.close();
     }
+
     public static void main(String[] args) {
         new TicTacToe().start();
     }
